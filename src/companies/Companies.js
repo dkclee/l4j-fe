@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import CompaniesList from "./CompaniesList";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./api";
+import SearchForm from "../shared/SearchForm";
+import JoblyApi from "../api";
 
 /** Show companies
  * 
@@ -9,6 +9,7 @@ import JoblyApi from "./api";
  * - companies: Array of company objects
  *    [ { handle, name, description, numEmployees, logoUrl }, ...]
  * - queryTerm: string to filter the companies results
+ * - isLoading: boolean
  */
 
 function Companies() {
@@ -18,7 +19,7 @@ function Companies() {
 
   /** get all companies when query term or is loading changes 
    * using JoblyApi class */
-  useEffect(function getAllCompaniesOnMount() {
+  useEffect(function getAllCompaniesOnSearch() {
     async function getAllCompanies() {
       let companies = await JoblyApi.getAllCompanies(queryTerm);
       setCompanies(companies);

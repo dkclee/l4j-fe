@@ -5,6 +5,8 @@ import JobCard from "./JobCard";
  * Prop:
  * - jobs: jobs to display
  *    [{ id, title, salary, equity }, ...]
+ *        OR
+ *    [ { id, title, salary, equity, companyHandle, companyName }, ...]
  */
 
 function JobCardList({ jobs }) {

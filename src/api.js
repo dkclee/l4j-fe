@@ -20,8 +20,8 @@ class JoblyApi {
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
     const params = (method === "get")
-        ? data
-        : {};
+      ? data
+      : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -34,28 +34,50 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  /** Get details on a company by handle. 
+   * Returns 
+   *  { handle, name, description, numEmployees, logoUrl, jobs }
+   *    where jobs is [{ id, title, salary, equity }, ...]
+  */
 
   static async getCompany(handle) {
     var res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  // obviously, you'll add a lot here ...
+  /** Get details on a company given a name filter. 
+   * Returns: 
+   * [{ handle, name, description, numEmployees, logoUrl }, ...]
+  */
 
   static async getAllCompanies(queryTerm) {
-    let data = (queryTerm) 
-      ? {name: queryTerm}
+    let data = (queryTerm)
+      ? { name: queryTerm }
       : {};
-    
+
     let res = await this.request("companies", data);
     return res.companies;
   }
+
+  /** Get details on all jobs given a title filter.
+  * Returns: 
+  * [ { id, title, salary, equity, companyHandle, companyName }, ...]
+  */
+
+  static async getAllJobs(queryTerm) {
+    let data = (queryTerm)
+      ? { title: queryTerm }
+      : {};
+
+    let res = await this.request("jobs", data);
+    return res.jobs;
+  }
+
 }
 
 // for now, put token ("testuser" / "password" on class)
 JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
+  "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
 export default JoblyApi;

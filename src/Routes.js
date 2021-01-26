@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./Homepage";
-import Companies from "./Companies";
-import CompanyDetail from "./CompanyDetail";
-import JobList from "./JobList";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
-import ProfileForm from "./ProfileForm";
+import Companies from "./companies/Companies";
+import CompanyDetail from "./companies/CompanyDetail";
+import JobList from "./jobs/JobList";
+import LoginForm from "./users/LoginForm";
+import SignupForm from "./users/SignupForm";
+import ProfileForm from "./users/ProfileForm";
 
 function Routes() {
   return (
