@@ -45,7 +45,7 @@ class JoblyApi {
 
   static async getAllCompanies(queryTerm) {
     let data = (queryTerm) 
-      ? {nameLike: queryTerm}
+      ? {name: queryTerm}
       : {};
     
     let res = await this.request("companies", data);

@@ -1,3 +1,5 @@
+import CompanyCard from "./CompanyCard";
+
 /** Show CompaniesList
  * 
  * Prop:
@@ -5,10 +7,14 @@
  *    [ { handle, name, description, numEmployees, logoUrl }, ...]
  */
 
-function CompaniesList({companies}) {
+function CompaniesList({ companies }) {
+  let companyCards = companies.map(c => (
+    <CompanyCard key={c.handle} company={c} />
+  ));
+
   return (
     <div className="CompaniesList">
-      <h1>Welcome to CompaniesList!</h1>
+      {companyCards}
     </div>
   );
 }

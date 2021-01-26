@@ -16,6 +16,8 @@ function Companies() {
   const [queryTerm, setQueryTerm] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  /** get all companies when query term or is loading changes 
+   * using JoblyApi class */
   useEffect(function getAllCompaniesOnMount() {
     async function getAllCompanies() {
       let companies = await JoblyApi.getAllCompanies(queryTerm);
@@ -36,7 +38,7 @@ function Companies() {
   if(isLoading) return <div>Currently Loading!</div>
 
   return (
-    <div className="Companies">
+    <div className="Companies m-5">
       <SearchForm onSearch={onSearch} />
       <CompaniesList companies={companies} />
     </div>
