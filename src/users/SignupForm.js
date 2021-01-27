@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
+import Alert from "../shared/Alert";
+import userContext from "../userContext";
 
 /** SignupForm
  * 
  * Props:
- *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
- *    where jobs is { id, title, companyHandle, companyName, state }
  *  - signup - parent function called when user signs up
  * 
+ * Context:
+ *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
+ *    where jobs is { id, title, companyHandle, companyName, state }
  */
 
-function SignupForm({ currentUser, signup }) {
+function SignupForm({ signup }) {
   const defaultFormData = {
     username: '',
     password: '',
@@ -19,15 +22,16 @@ function SignupForm({ currentUser, signup }) {
     email: '',
   };
   const [formData, setFormData] = useState(defaultFormData);
+  const [errors, setErrors] = useState(null);
+  const currentUser = useContext(userContext);
 
   // don't let user sign up if already logged in
   if (currentUser) return <Redirect to="/" />;
 
   /** handle form submission, call parent fn signup */
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signup(formData);
-    setFormData(defaultFormData);
+    setErrors(await signup(formData));
   }
 
   /** Update formData state with current state */
@@ -39,68 +43,76 @@ function SignupForm({ currentUser, signup }) {
   // Have we filled in every prompt?
   let notDone = (
     Object.values(formData)
-      .filter(v => v.trim() !== "").length < defaultFormData.length
+      .filter(v => v.trim() !== "").length < Object.keys(defaultFormData).length
   );
 
+  let alert = (errors)
+    ? <Alert msgs={errors} />
+    : null;
+
   return (
-    <form onSubmit={handleSubmit} className="m-4">
-      <div className="form-group">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          value={formData.username}
-          name="username"
-          className="form-control"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          value={formData.password}
-          name="password"
-          className="form-control"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          id="firstName"
-          value={formData.firstName}
-          name="firstName"
-          className="form-control"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          id="lastName"
-          value={formData.lastName}
-          name="lastName"
-          className="form-control"
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          value={formData.email}
-          name="email"
-          className="form-control"
-          onChange={handleChange}
-        />
-      </div>
-      <button disabled={notDone} className="btn btn-primary">Submit</button>
-    </form>
+    <div className="container col-md-6">
+      <h3 className="my-5">Signup Here!</h3>
+      <form onSubmit={handleSubmit} className="m-4 text-left">
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={formData.username}
+            name="username"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={formData.password}
+            name="password"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            value={formData.firstName}
+            name="firstName"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            value={formData.lastName}
+            name="lastName"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            value={formData.email}
+            name="email"
+            className="form-control"
+            onChange={handleChange}
+          />
+        </div>
+        {alert}
+        <button disabled={notDone} className="btn btn-primary">Submit</button>
+      </form>
+    </div>
   );
 }
 

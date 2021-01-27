@@ -42,6 +42,12 @@ class JoblyApi {
     return res.token;
   }
 
+  /** Retrieves token someone signs up  */
+  static async signup(formData) {
+    let res = await this.request("auth/register", formData, "post");
+    return res.token;
+  }
+
   /***************************************************** User methods */
 
   /** Get details on a user

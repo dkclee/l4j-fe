@@ -1,4 +1,7 @@
+import {useContext} from "react";
 import { NavLink } from "react-router-dom";
+
+import userContext from "./userContext";
 // import "./Navigation.css";
 
 /** Navigation component to show different dog names
@@ -9,7 +12,8 @@ import { NavLink } from "react-router-dom";
  * App -> Navigation
  */
 
-function Navigation({ currentUser, logout }) {
+function Navigation({ logout }) {
+  const currentUser = useContext(userContext);
   let navLinks;
 
   if (currentUser) {
@@ -25,7 +29,7 @@ function Navigation({ currentUser, logout }) {
         <NavLink key="profile" exact to="/profile" className="nav-link">Profile</NavLink>
       </li>
       <li className="nav-item">
-        <button onClick={logout} className="nav-link btn btn-link">Logout user</button>
+        <button onClick={logout} className="nav-link btn btn-link">Logout {currentUser.username}</button>
       </li>
     </ul>);
   } else {

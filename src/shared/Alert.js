@@ -9,7 +9,7 @@
 function Alert({msgs, type="danger"}) {
   return (
     <div className={`alert alert-${type}`} role="alert">
-      {msgs.map(m => <p>{m}</p>)}
+      {msgs.map((m,i) => <p key={i}>{m}</p>)}
     </div>
   )
 }

@@ -4,6 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import Routes from './Routes';
 import Navigation from './Navigation';
 
+import userContext from "./userContext";
+
 import JoblyApi from "./api";
 
 import jwt from "jsonwebtoken";
@@ -49,7 +51,6 @@ function App() {
     async function loginUsingApi() {
       try {
         let newToken = await JoblyApi.login(formData);
-        console.log('inside loginUsingApi', newToken);
         setToken(newToken);
         return null;
       } catch (err) {
@@ -59,7 +60,20 @@ function App() {
     return loginUsingApi();
   }
 
-  function signup() { }
+  /** Function called by SignupForm when submitted */
+  function signup(formData) {
+    async function signupUsingApi() {
+      try {
+        let newToken = await JoblyApi.signup(formData);
+        setToken(newToken);
+        return null;
+      } catch (err) {
+        return err;
+      }
+    }
+    return signupUsingApi();
+
+  }
 
   function logout() {
     setToken(null);
@@ -70,12 +84,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navigation currentUser={currentUser} logout={logout} />
-        <Routes
-          currentUser={currentUser}
-          login={login}
-          signup={signup}
-        />
+        <userContext.Provider value={currentUser}>
+          <Navigation logout={logout} />
+          <Routes
+            login={login}
+            signup={signup}
+          />
+        </userContext.Provider>
       </BrowserRouter>
     </div>
   );
