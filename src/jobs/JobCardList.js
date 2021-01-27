@@ -10,9 +10,15 @@ import JobCard from "./JobCard";
  */
 
 function JobCardList({ jobs }) {
-  // TODO: pass id, title, etc. to jobcard (rather than job)
   let jobCards = jobs.map(j => (
-    <JobCard key={j.id} {...j} />
+    <JobCard 
+      key={j.id} 
+      id={j.id} 
+      title={j.title}
+      salary={j.salary}
+      equity={j.equity}
+      companyHandle={j.companyHandle}
+      companyName={j.companyName} />
   ));
 
   return (

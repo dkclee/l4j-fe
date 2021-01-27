@@ -14,30 +14,39 @@ import JoblyApi from "../api";
 
 function Companies() {
   const [companies, setCompanies] = useState([]);
-  const [queryTerm, setQueryTerm] = useState(null); //potentially don't need
+  const [name, setName] = useState(""); 
   const [isLoading, setIsLoading] = useState(true);
 
   /** get all companies when query term or is loading changes 
    * using JoblyApi class */
   useEffect(function getAllCompaniesOnSearch() {
     async function getAllCompanies() {
-      // TODO: add a try catch to this. Pass a name rather than query term
-      let companies = await JoblyApi.getAllCompanies(queryTerm);
-      setCompanies(companies);
-      setIsLoading(false);
+      let companies;
+      try {
+        companies = await JoblyApi.getAllCompanies(name);
+        setCompanies(companies);
+        setIsLoading(false);
+      } catch (err) {
+        // Maybe we want to let the user know what the error was
+        // and redirect to some error page or ask the user to 
+        // refresh the page?
+        // Redirect and perhaps use the location object to hold
+        // an error message
+        return;
+      }
     }
     if (isLoading) getAllCompanies();
-  }, [queryTerm, isLoading]);
+  }, [name, isLoading]);
 
   /** Function called by the SearchForm in order to change
-   *  the queryTerm for the companies AJAX request
+   *  the name for the companies AJAX request
    */
 
-  // TODO: alternative option here: we could move getAllJobs outside of
-  // useEffect and call it here. Then, we wouldn't need to have queryTerm as a
+  // Alternative option here: we could move getAllJobs outside of
+  // useEffect and call it here. Then, we wouldn't need to have name as a
   // variable. 
   function onSearch(term) {
-    setQueryTerm(term);
+    setName(term);
     setIsLoading(true);
   }
 

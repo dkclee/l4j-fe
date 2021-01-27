@@ -35,7 +35,7 @@ function CompanyDetail() {
     }
     getCompany();
   }, [handle, isLoading]);
-  // TODO: object to pass to Redirect called location - could do a flash message
+  // Object to pass to Redirect called location - could do a flash message
   // (use location and see if val exists in location). 
   if (company === null) {
     return <Redirect to="/companies" />

@@ -4,23 +4,23 @@ import "./CompanyCard.css";
 /** Show CompanyCard
  * 
  * Prop:
- * - company: company to display
- *    { handle, name, description, numEmployees, logoUrl }
+ * - handle, name, description, numEmployees, logoUrl
+ *    
  */
 
 //  TODO: pass in handle, name, etc & destructure
-function CompanyCard({ company }) {
+function CompanyCard({ handle, name, description, numEmployees, logoUrl }) {
   // console.log('companyCard company prop is:', company);
   return (
     <div className="CompanyCard">
-      <Link to={`/companies/${company.handle}`}>
+      <Link to={`/companies/${handle}`}>
         <div className="card text-left m-4">
           <div className="card-body">
-            <h4>{company.name}
-              {company.logoUrl && 
-              <img src={company.logoUrl} alt={`${company.name}'s logo`} className="ml-5 float-right" />}
+            <h4>{name}
+              {logoUrl && 
+              <img src={logoUrl} alt={`${name}'s logo`} className="ml-5 float-right" />}
             </h4>
-            <p>{company.description}</p>
+            <p>{description}</p>
           </div>
         </div>
       </Link>

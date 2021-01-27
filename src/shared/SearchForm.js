@@ -18,15 +18,15 @@ function SearchForm({ onSearch }) {
     // TODO: update and use trim to make sure only submitted when searchTerm
     // isn't a string
     evt.preventDefault();
-    onSearch(searchTerm);
+    let trimmed = searchTerm.trim();
+
+    if(trimmed) onSearch(trimmed);
     setSearchTerm('');
   }
 
   /** Update searchTerm state with current state */
   function handleChange(evt) {
-    // TODO: update evt.target.value rather than grabbing value.
-    const { value } = evt.target;
-    setSearchTerm(value);
+    setSearchTerm(evt.target.value);
   }
 
   return (
