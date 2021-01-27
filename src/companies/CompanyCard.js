@@ -8,6 +8,7 @@ import "./CompanyCard.css";
  *    { handle, name, description, numEmployees, logoUrl }
  */
 
+//  TODO: destructure company
 function CompanyCard({ company }) {
   // console.log('companyCard company prop is:', company);
   return (

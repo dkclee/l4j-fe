@@ -24,6 +24,7 @@ function JobList() {
   /** get all jobs when query term or is loading changes 
  * using JoblyApi class */
   useEffect(function getAllJobsOnSearch() {
+    // TODO: update similar to companies
     async function getAllJobs() {
       let jobs = await JoblyApi.getAllJobs(queryTerm);
       setJobs(jobs);

@@ -14,18 +14,19 @@ import JoblyApi from "../api";
 
 function Companies() {
   const [companies, setCompanies] = useState([]);
-  const [queryTerm, setQueryTerm] = useState(null);
+  const [queryTerm, setQueryTerm] = useState(null); //potentially don't need
   const [isLoading, setIsLoading] = useState(true);
 
   /** get all companies when query term or is loading changes 
    * using JoblyApi class */
   useEffect(function getAllCompaniesOnSearch() {
     async function getAllCompanies() {
+      // TODO: add a try catch to this. pass in a name. 
       let companies = await JoblyApi.getAllCompanies(queryTerm);
       setCompanies(companies);
       setIsLoading(false);
     }
-    if(isLoading) getAllCompanies();
+    if (isLoading) getAllCompanies();
   }, [queryTerm, isLoading]);
 
   /** Function called by the SearchForm in order to change

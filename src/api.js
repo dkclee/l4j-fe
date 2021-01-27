@@ -50,7 +50,10 @@ class JoblyApi {
    * [{ handle, name, description, numEmployees, logoUrl }, ...]
   */
 
-  static async getAllCompanies(queryTerm) {
+  static async getAllCompanies(queryTerm={}) {
+    // TODO: update ternary - put name in component
+    // takes in a string of name, and on line 60 pass in name
+    // data below change to {name}
     let data = (queryTerm)
       ? { name: queryTerm }
       : {};
@@ -64,7 +67,7 @@ class JoblyApi {
   * [ { id, title, salary, equity, companyHandle, companyName }, ...]
   */
 
-  static async getAllJobs(queryTerm) {
+  static async getAllJobs(queryTerm={}) {
     let data = (queryTerm)
       ? { title: queryTerm }
       : {};

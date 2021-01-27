@@ -15,6 +15,8 @@ function SearchForm({ onSearch }) {
 
   /** handle form submission, call parent fn onSearch */
   function handleSubmit(evt) {
+    // TODO: update and use trim to make sure only submitted when searchTerm
+    // isn't a string
     evt.preventDefault();
     onSearch(searchTerm);
     setSearchTerm('');
@@ -22,6 +24,7 @@ function SearchForm({ onSearch }) {
 
   /** Update searchTerm state with current state */
   function handleChange(evt) {
+    // TODO: update evt.target.value
     const { value } = evt.target;
     setSearchTerm(value);
   }

@@ -8,6 +8,7 @@ import CompanyCard from "./CompanyCard";
  */
 
 function CompaniesList({ companies }) {
+  // Same change with company prop
   let companyCards = companies.map(c => (
     <CompanyCard key={c.handle} company={c} />
   ));

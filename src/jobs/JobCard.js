@@ -7,6 +7,7 @@
  *    { id, title, salary, equity, companyHandle, companyName }
  */
 
+//  TODO: destructure - default value for companyHandle/ name
 function JobCard({ job }) {
   // console.log('JobCard company prop is:', company);
   return (

@@ -23,7 +23,7 @@ function CompanyDetail() {
   const [isLoading, setIsLoading] = useState(true);
   const {handle} = useParams();
   
-  useEffect(function getCompanyOnReder() {
+  useEffect(function getCompanyOnRender() {
     async function getCompany() {
       try {
         var company = await JoblyApi.getCompany(handle);
@@ -35,7 +35,8 @@ function CompanyDetail() {
     }
     getCompany();
   }, [handle, isLoading]);
-  
+  // TODO: object to pass to Redirect called location - could do a flash message
+  // (use location and see if val exists in location). 
   if (company === null) {
     return <Redirect to="/companies" />
   }
