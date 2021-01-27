@@ -38,14 +38,14 @@ function SignupForm({ currentUser, signup }) {
 
   // Have we filled in every prompt?
   let notDone = (
-    Object.values(promptForm)
-      .filter(v => v.trim() !== "").length < prompts.length
+    Object.values(formData)
+      .filter(v => v.trim() !== "").length < defaultFormData.length
   );
 
   return (
     <form onSubmit={handleSubmit} className="m-4">
       <div className="form-group">
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
@@ -56,7 +56,7 @@ function SignupForm({ currentUser, signup }) {
         />
       </div>
       <div className="form-group">
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -67,7 +67,7 @@ function SignupForm({ currentUser, signup }) {
         />
       </div>
       <div className="form-group">
-        <label for="firstName">First Name</label>
+        <label htmlFor="firstName">First Name</label>
         <input
           type="text"
           id="firstName"
@@ -78,7 +78,7 @@ function SignupForm({ currentUser, signup }) {
         />
       </div>
       <div className="form-group">
-        <label for="lastName">Last Name</label>
+        <label htmlFor="lastName">Last Name</label>
         <input
           type="text"
           id="lastName"
@@ -89,7 +89,7 @@ function SignupForm({ currentUser, signup }) {
         />
       </div>
       <div className="form-group">
-        <label for="email">Email</label>
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
@@ -99,7 +99,7 @@ function SignupForm({ currentUser, signup }) {
           onChange={handleChange}
         />
       </div>
-      <button disabled={notDone} class="btn btn-primary">Submit</button>
+      <button disabled={notDone} className="btn btn-primary">Submit</button>
     </form>
   );
 }

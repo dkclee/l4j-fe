@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
  * App -> Navigation
  */
 
-function Navigation({ currentUser }) {
+function Navigation({ currentUser, logout }) {
   let navLinks;
 
   if (currentUser) {
@@ -25,7 +25,7 @@ function Navigation({ currentUser }) {
         <NavLink key="profile" exact to="/profile" className="nav-link">Profile</NavLink>
       </li>
       <li className="nav-item">
-        <button className="nav-link btn btn-link">Logout user</button>
+        <button onClick={logout} className="nav-link btn btn-link">Logout user</button>
       </li>
     </ul>);
   } else {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, useLocation } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Alert from "../shared/Alert";
 
@@ -15,16 +15,17 @@ import Alert from "../shared/Alert";
 function LoginForm({ currentUser, login }) {
   const defaultFormData = { username: '', password: '' };
   const [formData, setFormData] = useState(defaultFormData);
-  const location = useLocation();
+  const [errors, setErrors] = useState(null);
+  console.log('LoginForm');
 
   // don't let user login if already logged in
   if (currentUser) return <Redirect to="/" />;
 
-  /** handle form submission, call parent fn login */
-  function handleSubmit(evt) {
+  /** handle form submission, call parent fn login and create alert if errors
+   * are called */
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
-    setFormData(defaultFormData);
+    setErrors(await login(formData));
   }
 
   /** Update formData state with current state */
@@ -35,18 +36,18 @@ function LoginForm({ currentUser, login }) {
 
   // Have we filled in every prompt?
   let notDone = (
-    Object.values(promptForm)
-      .filter(v => v.trim() !== "").length < prompts.length
+    Object.values(formData)
+      .filter(v => v.trim() !== "").length < defaultFormData.length
   );
 
-  let alert = (location?.state.err) 
-    ? <Alert msgs={location.state.err} />
+  let alert = (errors)
+    ? <Alert msgs={errors} />
     : null;
 
   return (
     <form onSubmit={handleSubmit} className="m-4">
       <div className="form-group">
-        <label for="username">Username</label>
+        <label htmlFor="username">Username</label>
         <input
           type="text"
           id="username"
@@ -57,7 +58,7 @@ function LoginForm({ currentUser, login }) {
         />
       </div>
       <div className="form-group">
-        <label for="password">Password</label>
+        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
@@ -68,7 +69,7 @@ function LoginForm({ currentUser, login }) {
         />
       </div>
       {alert}
-      <button disabled={notDone} class="btn btn-primary">Submit</button>
+      <button disabled={notDone} className="btn btn-primary">Submit</button>
     </form>
   );
 }

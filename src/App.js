@@ -1,15 +1,15 @@
-import {useState, useEffect} from "react";
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import Routes from './Routes';
 import Navigation from './Navigation';
 
 import JoblyApi from "./api";
 
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
-import "bootstrap/dist/css/bootstrap.css";
 import './App.css';
+import "bootstrap/dist/css/bootstrap.css";
 
 /** Jobly App Component
  * 
@@ -25,7 +25,7 @@ import './App.css';
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
-  
+
   useEffect(function updateUserOnChange() {
     async function updateUser() {
       try {
@@ -49,20 +49,22 @@ function App() {
     async function loginUsingApi() {
       try {
         let newToken = await JoblyApi.login(formData);
+        console.log('inside loginUsingApi', newToken);
         setToken(newToken);
+        return null;
       } catch (err) {
-        const location = {
-          pathname: '/login',
-          state: { err }
-        }
-        return <Redirect to={location} />
+        return err;
       }
     }
+    return loginUsingApi();
   }
 
-  function signup() {}
+  function signup() { }
 
-  function logout() {}
+  function logout() {
+    setToken(null);
+    setCurrentUser(null);
+  }
 
 
   return (
