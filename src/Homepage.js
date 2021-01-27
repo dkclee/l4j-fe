@@ -1,7 +1,7 @@
 /** Show homepage
  * 
  * Props:
- *  - user: can see if user is logged in
+ *  - currentUser: can see if currentUser is logged in
  */
 
 function Homepage() {

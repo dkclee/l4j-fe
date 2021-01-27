@@ -34,6 +34,30 @@ class JoblyApi {
 
   // Individual API routes
 
+  /***************************************************** auth methods */
+
+  /** Retrieves token given correct credentials */
+  static async login({username, password}) {
+    let res = await this.request(`auth/token`, {username, password}, "post");
+    return res.token;
+  }
+
+  /***************************************************** User methods */
+
+  /** Get details on a user
+   *  - Only returns details when the token is valid
+   * 
+   *  Returns 
+   *  { username, firstName, lastName, isAdmin, jobs }
+   *    where jobs is { id, title, companyHandle, companyName, state }
+   */
+  static async getUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  /***************************************************** Company methods */
+
   /** Get details on a company by handle. 
    * Returns 
    *  { handle, name, description, numEmployees, logoUrl, jobs }
@@ -41,7 +65,7 @@ class JoblyApi {
   */
 
   static async getCompany(handle) {
-    var res = await this.request(`companies/${handle}`);
+    let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
@@ -58,6 +82,9 @@ class JoblyApi {
     let res = await this.request("companies", data);
     return res.companies;
   }
+
+
+  /***************************************************** Job methods */
 
   /** Get details on all jobs given a title filter.
   * Returns: 

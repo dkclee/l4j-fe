@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
+
+import Alert from "../shared/Alert";
 
 /** Show LoginForm
  * 
  * Props:
- *  - user - { username, firstName, lastName, isAdmin, jobs }
+ *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
  *    where jobs is { id, title, companyHandle, companyName, state }
  *  - login - parent function called when user logs in
  * 
  */
 
-function LoginForm({ user, login }) {
+function LoginForm({ currentUser, login }) {
   const defaultFormData = { username: '', password: '' };
   const [formData, setFormData] = useState(defaultFormData);
+  const location = useLocation();
 
   // don't let user login if already logged in
-  if (user) return <Redirect to="/" />;
+  if (currentUser) return <Redirect to="/" />;
 
   /** handle form submission, call parent fn login */
   function handleSubmit(evt) {
@@ -35,6 +38,10 @@ function LoginForm({ user, login }) {
     Object.values(promptForm)
       .filter(v => v.trim() !== "").length < prompts.length
   );
+
+  let alert = (location?.state.err) 
+    ? <Alert msgs={location.state.err} />
+    : null;
 
   return (
     <form onSubmit={handleSubmit} className="m-4">
@@ -60,6 +67,7 @@ function LoginForm({ user, login }) {
           onChange={handleChange}
         />
       </div>
+      {alert}
       <button disabled={notDone} class="btn btn-primary">Submit</button>
     </form>
   );

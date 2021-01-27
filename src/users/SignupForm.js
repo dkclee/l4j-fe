@@ -4,13 +4,13 @@ import { Redirect } from "react-router-dom";
 /** SignupForm
  * 
  * Props:
- *  - user - { username, firstName, lastName, isAdmin, jobs }
+ *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
  *    where jobs is { id, title, companyHandle, companyName, state }
  *  - signup - parent function called when user signs up
  * 
  */
 
-function SignupForm({ user, signup }) {
+function SignupForm({ currentUser, signup }) {
   const defaultFormData = {
     username: '',
     password: '',
@@ -21,7 +21,7 @@ function SignupForm({ user, signup }) {
   const [formData, setFormData] = useState(defaultFormData);
 
   // don't let user sign up if already logged in
-  if (user) return <Redirect to="/" />;
+  if (currentUser) return <Redirect to="/" />;
 
   /** handle form submission, call parent fn signup */
   function handleSubmit(evt) {

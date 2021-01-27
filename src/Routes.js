@@ -8,7 +8,7 @@ import LoginForm from "./users/LoginForm";
 import SignupForm from "./users/SignupForm";
 import ProfileForm from "./users/ProfileForm";
 
-function Routes({ user, login, signup }) {
+function Routes({ currentUser, login, signup }) {
   return (
     <Switch>
       <Route exact path="/"><Homepage /></Route>
@@ -16,10 +16,10 @@ function Routes({ user, login, signup }) {
       <Route exact path="/companies/:handle"><CompanyDetail /></Route>
       <Route exact path="/jobs"><JobList /></Route>
       <Route exact path="/login">
-        <LoginForm user={user} login={login} />
+        <LoginForm currentUser={currentUser} login={login} />
       </Route>
       <Route exact path="/signup">
-        <SignupForm user={user} signup={signup} />
+        <SignupForm currentUser={currentUser} signup={signup} />
       </Route>
       <Route exact path="/profile">
         <ProfileForm />
