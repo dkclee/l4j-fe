@@ -9,7 +9,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Navigation />
-        <Routes />
+        <Routes
+          user={user}
+          login={login}
+          signup={signup}
+        />
       </BrowserRouter>
     </div>
   );

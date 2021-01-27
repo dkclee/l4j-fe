@@ -8,9 +8,7 @@ import "./CompanyCard.css";
  *    
  */
 
-//  TODO: pass in handle, name, etc & destructure
 function CompanyCard({ handle, name, description, numEmployees, logoUrl }) {
-  // console.log('companyCard company prop is:', company);
   return (
     <div className="CompanyCard">
       <Link to={`/companies/${handle}`}>

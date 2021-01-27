@@ -15,8 +15,6 @@ function SearchForm({ onSearch }) {
 
   /** handle form submission, call parent fn onSearch */
   function handleSubmit(evt) {
-    // TODO: update and use trim to make sure only submitted when searchTerm
-    // isn't a string
     evt.preventDefault();
     let trimmed = searchTerm.trim();
 
