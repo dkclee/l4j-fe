@@ -24,7 +24,7 @@ function JobList() {
   /** get all jobs when query term or is loading changes 
  * using JoblyApi class */
   useEffect(function getAllJobsOnSearch() {
-    // TODO: update similar to companies
+    // TODO: update, add try catch and pass in title.
     async function getAllJobs() {
       let jobs = await JoblyApi.getAllJobs(queryTerm);
       setJobs(jobs);
@@ -36,6 +36,9 @@ function JobList() {
   /** Function called by the SearchForm in order to change
    *  the queryTerm for the companies AJAX request
    */
+  // TODO: alternative option here: we could move getAllJobs outside of
+  // useEffect and call it here. Then, we wouldn't need to have queryTerm as a
+  // variable. 
   function onSearch(term) {
     setQueryTerm(term);
     setIsLoading(true);

@@ -24,7 +24,7 @@ function SearchForm({ onSearch }) {
 
   /** Update searchTerm state with current state */
   function handleChange(evt) {
-    // TODO: update evt.target.value
+    // TODO: update evt.target.value rather than grabbing value.
     const { value } = evt.target;
     setSearchTerm(value);
   }
