@@ -28,6 +28,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useState(null);
 
+  /** Update the user state upon mount and when the token changes */
   useEffect(function updateUserOnChange() {
     async function updateUser() {
       try {
@@ -47,6 +48,7 @@ function App() {
     if (token) updateUser();
   }, [token]);
 
+  /** Function called by LoginForm when submitted */
   function login(formData) {
     async function loginUsingApi() {
       try {
@@ -75,11 +77,11 @@ function App() {
 
   }
 
+  /** Function called by Navigation when logout btn is clicked */
   function logout() {
     setToken(null);
     setCurrentUser(null);
   }
-
 
   return (
     <div className="App">
