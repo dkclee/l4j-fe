@@ -33,7 +33,7 @@ function App() {
     async function updateUser() {
       try {
         JoblyApi.token = token;
-        let username = jwt.decode(token).username;
+        let {username} = jwt.decode(token);
         let user = await JoblyApi.getUser(username);
         setCurrentUser(user);
       } catch (err) {
@@ -42,10 +42,16 @@ function App() {
         // retry the login
         // Redirect and perhaps use the location object to hold
         // an error message
+        console.error(err);
+        // To be extra safe
+        setCurrentUser(null);
         return;
       }
     }
-    if (token) updateUser();
+    // Want to clear the user so that there isn't a state where
+    // token refers to one user and user is another user
+    setCurrentUser(null);
+    if(token) updateUser();
   }, [token]);
 
   /** Function called by LoginForm when submitted */
@@ -54,6 +60,8 @@ function App() {
       try {
         let newToken = await JoblyApi.login(formData);
         setToken(newToken);
+        // Perhaps return a different message when you successfully login
+        // so that we can display as a separate message
         return null;
       } catch (err) {
         return err;
@@ -68,6 +76,8 @@ function App() {
       try {
         let newToken = await JoblyApi.signup(formData);
         setToken(newToken);
+        // Perhaps return a different message when you successfully login
+        // so that we can display as a separate message
         return null;
       } catch (err) {
         return err;

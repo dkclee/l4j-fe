@@ -44,6 +44,7 @@ class JoblyApi {
 
   /** Retrieves token someone signs up  */
   static async signup(formData) {
+    // TODO: make it very explicit about what is being passed in 
     let res = await this.request("auth/register", formData, "post");
     return res.token;
   }

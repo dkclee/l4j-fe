@@ -31,6 +31,7 @@ function SignupForm({ signup }) {
   /** handle form submission, call parent fn signup */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    // TODO: make similar changes like the LoginForm
     setErrors(await signup(formData));
   }
 

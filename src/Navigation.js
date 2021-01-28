@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 
 import userContext from "./userContext";
@@ -23,32 +23,34 @@ function Navigation({ logout }) {
 
   let navLinks;
 
+  // <> </> React.Fragment Component useful for grouping things together
+  // without having the JSX syntax yell at us 
   if (currentUser) {
     navLinks = (
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
-        <NavLink key="companies" exact to="/companies" className="nav-link">Companies</NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink key="jobs" exact to="/jobs" className="nav-link">Jobs</NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink key="profile" exact to="/profile" className="nav-link">Profile</NavLink>
-      </li>
-      <li className="nav-item">
-        <button onClick={handleClick} className="nav-link btn btn-link">Logout {currentUser.username}</button>
-      </li>
-    </ul>);
+      <>
+        <li className="nav-item">
+          <NavLink key="companies" exact to="/companies" className="nav-link">Companies</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink key="jobs" exact to="/jobs" className="nav-link">Jobs</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink key="profile" exact to="/profile" className="nav-link">Profile</NavLink>
+        </li>
+        <li className="nav-item">
+          <button onClick={handleClick} className="nav-link btn btn-link">Logout {currentUser.username}</button>
+        </li>
+      </>);
   } else {
     navLinks = (
-    <ul className="navbar-nav ml-auto">
-      <li className="nav-item">
-        <NavLink key="login" exact to="/login" className="nav-link">Login</NavLink>
-      </li>
-      <li className="nav-item">
-        <NavLink key="signup" exact to="/signup" className="nav-link">Signup</NavLink>
-      </li>
-    </ul>);
+      <>
+        <li className="nav-item">
+          <NavLink key="login" exact to="/login" className="nav-link">Login</NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink key="signup" exact to="/signup" className="nav-link">Signup</NavLink>
+        </li>
+      </>);
   }
 
   return (
@@ -58,7 +60,9 @@ function Navigation({ logout }) {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        {navLinks}
+        <ul className="navbar-nav ml-auto">
+          {navLinks}
+        </ul>
       </div>
     </nav>
   );

@@ -28,7 +28,11 @@ function LoginForm({ login }) {
    * are called */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    setErrors(await login(formData));
+    let result = await login(formData);
+    // maybe use the history object to push the user to homepage
+    // if the user login was successful
+    // TODO: we can use location object when we do history.push
+    setErrors(result);
   }
 
   /** Update formData state with current state */
