@@ -1,4 +1,6 @@
+import {useContext} from "react";
 import JobCard from "./JobCard";
+import userContext from "../userContext";
 
 /** Show JobCardList
  * 
@@ -10,6 +12,11 @@ import JobCard from "./JobCard";
  */
 
 function JobCardList({ jobs }) {
+  const currentUser = useContext(userContext);
+  console.log(currentUser);
+
+  let appliedJobsId = new Set(currentUser.applications);
+
   let jobCards = jobs.map(j => (
     <JobCard 
       key={j.id} 
@@ -18,7 +25,8 @@ function JobCardList({ jobs }) {
       salary={j.salary}
       equity={j.equity}
       companyHandle={j.companyHandle}
-      companyName={j.companyName} />
+      companyName={j.companyName}
+      hasApplied={appliedJobsId.has(j.id)} />
   ));
 
   return (

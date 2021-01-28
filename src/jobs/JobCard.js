@@ -2,9 +2,14 @@
  * 
  * Prop:
  * - id, title, salary, equity, companyHandle, companyName
+ * - hasApplied: boolean 
  */
 
-function JobCard({ id, title, salary, equity, companyHandle, companyName }) {
+function JobCard({ id, title, salary, equity, companyHandle, companyName, hasApplied=false }) {
+  let applicationBtn = (hasApplied) 
+    ? <button className="btn disabled btn-danger">APPLIED</button>
+    : <button className="btn btn-danger">APPLY</button>;
+
   return (
     <div className="JobCard">
       <div className="card text-left m-4">
@@ -13,7 +18,7 @@ function JobCard({ id, title, salary, equity, companyHandle, companyName }) {
           <h3>{companyName}</h3>
           <p>Salary: {salary}</p>
           <p>Equity: {equity}</p>
-          <button className="btn btn-danger">APPLY</button>
+          {applicationBtn}
         </div>
       </div>
     </div>

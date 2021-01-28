@@ -92,7 +92,7 @@ function ProfileForm({ updateProfile }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Confirm password to make changes:</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"

@@ -58,11 +58,12 @@ class JoblyApi {
    *  - Only returns details when the token is valid
    * 
    *  Returns 
-   *  { username, firstName, lastName, isAdmin, jobs }
-   *    where jobs is { id, title, companyHandle, companyName, state }
+   *  { username, firstName, lastName, isAdmin, applications }
+   *    where applications is [jobId, ...]
    */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
+    console.log("result of getUser method in API helper", res);
     return res.user;
   }
 
@@ -83,6 +84,20 @@ class JoblyApi {
       "patch",
     );
     return res.user;
+  }
+
+  /** POST /[username]/jobs/[id]  { state } => { application }
+   *
+   * Returns {"applied": jobId}
+   *
+   * Authorization required: admin or same-user-as-:username
+   * */
+  static async applyForJob(username,jobId) {
+    let res = await this.request(
+      `users/${username}/jobs/${jobId}`,
+      {}, 
+      "patch");
+    return res;
   }
 
   /***************************************************** Company methods */
