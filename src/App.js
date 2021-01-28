@@ -27,15 +27,9 @@ import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [token, setToken] = useLocalStorage('token', null);
-  // TODO: Have a piece of state that tells you that you are in the process
-  // of loggin in. "isLoading" of logging in and the routes can check this
-  // or maybe no route runs in the App. Show "checking credentials message"
-  // it can fail or succeed 
-
-  // Maybe pack into current user by having 3 different values: 
-
-  // Custom hooks: AJAX calls with loading/errors 
+  // Potential refactor: custom hooks: AJAX calls with loading/errors 
 
   /** Update the user state upon mount and when the token changes */
   useEffect(function updateUserOnChange() {
@@ -45,6 +39,7 @@ function App() {
         let { username } = jwt.decode(token);
         let user = await JoblyApi.getUser(username);
         setCurrentUser(user);
+        setIsLoggingIn(false);
       } catch (err) {
         // Maybe we want to let the user know what the error was
         // and redirect to some error page or ask the user to 
@@ -54,6 +49,7 @@ function App() {
         console.error(err);
         // To be extra safe
         setCurrentUser(null);
+        setIsLoggingIn(false);
         return;
       }
     }
@@ -61,6 +57,7 @@ function App() {
     // token refers to one user and user is another user
     setCurrentUser(null);
     if (token) updateUser();
+    else setIsLoggingIn(false);
   }, [token]);
 
   /** Function called by LoginForm when submitted */
@@ -74,6 +71,7 @@ function App() {
         return { success: false, err };
       }
     }
+    setIsLoggingIn(true);
     return loginUsingApi();
   }
 
@@ -88,6 +86,7 @@ function App() {
         return { success: false, err };
       }
     }
+    setIsLoggingIn(true);
     return signupUsingApi();
   }
 
@@ -97,15 +96,34 @@ function App() {
     setCurrentUser(null);
   }
 
+  /** Function called by ProfileForm when submitted */
+  function updateProfile(formData) {
+    async function updateProfileUsingApi() {
+      try {
+        let newUser = await JoblyApi.updateProfile(currentUser.username, formData);
+        setCurrentUser(currentUser => ({ ...currentUser, ...newUser }));
+        return { msgs: ["Successfully updated"], type: "success" };
+      } catch (err) {
+        return { msgs: err, type: "danger" };
+      }
+    }
+    return updateProfileUsingApi();
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
         <userContext.Provider value={currentUser}>
           <Navigation logout={logout} />
-          <Routes
-            login={login}
-            signup={signup}
-          />
+          {
+            (isLoggingIn)
+              ? <div>Logging in....</div>
+              : <Routes
+                login={login}
+                signup={signup}
+                updateProfile={updateProfile}
+              />
+          }
         </userContext.Provider>
       </BrowserRouter>
     </div>

@@ -12,7 +12,7 @@ function Homepage() {
   const currentUser = useContext(userContext);
 
   if(!currentUser) return (
-    <div className="Homepage">
+    <div className="Homepage m-5">
       <h1>Jobly</h1>
       <p>Find all the jobs you want here!</p>
       <Link className="btn btn-primary m-3" to="/login">Log In</Link>
@@ -21,8 +21,9 @@ function Homepage() {
   )
 
   return (
-    <div className="Homepage">
-      <h1>Welcome to homepage {currentUser.firstName}!</h1>
+    <div className="Homepage m-5">
+      <h1>Welcome to Jobly, {currentUser.firstName}!</h1>
+      <p>Find all the jobs you want here!</p>
     </div>
   );
 }

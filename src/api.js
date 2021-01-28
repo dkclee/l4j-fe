@@ -37,18 +37,18 @@ class JoblyApi {
   /***************************************************** auth methods */
 
   /** Retrieves token given correct credentials */
-  static async login({username, password}) {
-    let res = await this.request(`auth/token`, {username, password}, "post");
+  static async login({ username, password }) {
+    let res = await this.request(`auth/token`, { username, password }, "post");
     return res.token;
   }
 
   /** Retrieves token someone signs up  */
-  static async signup({username, password, firstName, lastName, email}) {
+  static async signup({ username, password, firstName, lastName, email }) {
     let res = await this.request(
-      "auth/register", 
-      {username, password, firstName, lastName, email}, 
+      "auth/register",
+      { username, password, firstName, lastName, email },
       "post",
-      );
+    );
     return res.token;
   }
 
@@ -63,6 +63,25 @@ class JoblyApi {
    */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
+    return res.user;
+  }
+
+  /** PATCH /[username] { user } => { user }
+   *
+   * Data can include:
+   *   { firstName, lastName, password, email }
+   *
+   * Returns { username, firstName, lastName, email, isAdmin }
+   *
+   * Authorization required: admin or same-user-as-:username
+   **/
+  static async updateProfile(username,
+    { firstName, lastName, password, email }) {
+    let res = await this.request(
+      `users/${username}`,
+      { firstName, lastName, password, email },
+      "patch",
+    );
     return res.user;
   }
 
@@ -84,7 +103,7 @@ class JoblyApi {
    * [{ handle, name, description, numEmployees, logoUrl }, ...]
   */
 
-  static async getAllCompanies(name="") {
+  static async getAllCompanies(name = "") {
     let data = (name)
       ? { name }
       : {};
@@ -101,7 +120,7 @@ class JoblyApi {
   * [ { id, title, salary, equity, companyHandle, companyName }, ...]
   */
 
-  static async getAllJobs(title="") {
+  static async getAllJobs(title = "") {
     let data = (title)
       ? { title }
       : {};

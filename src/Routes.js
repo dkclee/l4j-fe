@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./Homepage";
 import Companies from "./companies/Companies";
@@ -9,7 +9,7 @@ import SignupForm from "./users/SignupForm";
 import ProfileForm from "./users/ProfileForm";
 import userContext from "./userContext";
 
-function Routes({ login, signup }) {
+function Routes({ login, signup, updateProfile }) {
   const currentUser = useContext(userContext);
   const loginLocation = {
     pathname: "/login",
@@ -23,13 +23,13 @@ function Routes({ login, signup }) {
         <Homepage />
       </Route>
       <Route exact path="/companies">
-        {currentUser ? <Companies /> : <Redirect to={loginLocation} /> }
+        {currentUser ? <Companies /> : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/companies/:handle">
-        {currentUser ? <CompanyDetail /> : <Redirect to={loginLocation} /> }
+        {currentUser ? <CompanyDetail /> : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/jobs">
-        {currentUser ? <JobList /> : <Redirect to={loginLocation} /> }
+        {currentUser ? <JobList /> : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/login">
         <LoginForm login={login} />
@@ -38,7 +38,9 @@ function Routes({ login, signup }) {
         <SignupForm signup={signup} />
       </Route>
       <Route exact path="/profile">
-        {currentUser ? <ProfileForm /> : <Redirect to={loginLocation} /> }
+        {currentUser
+          ? <ProfileForm updateProfile={updateProfile} />
+          : <Redirect to={loginLocation} />}
       </Route>
       <Redirect to="/" />
     </Switch>

@@ -56,7 +56,7 @@ function JobList() {
   if (isLoading) return <div>Currently Loading!</div>
 
   return (
-    <div className="JobList">
+    <div className="JobList m-5">
       <SearchForm onSearch={onSearch} />
       <JobCardList jobs={jobs} />
     </div>
