@@ -19,7 +19,6 @@ import JobCardList from "../jobs/JobCardList";
  */
 
 function JobList({applyForJob}) {
-  console.log('JobList applyForJob', applyForJob);
 
   const [jobs, setJobs] = useState([]);
   const [title, setTitle] = useState(null);

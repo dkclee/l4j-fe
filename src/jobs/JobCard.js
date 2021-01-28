@@ -9,7 +9,6 @@
 function JobCard({ id, title, salary, equity, companyHandle, companyName, hasApplied=false, applyForJob }) {
   
   function onClick() {
-    console.log('apply for job', applyForJob);
     applyForJob(id);
   }
 

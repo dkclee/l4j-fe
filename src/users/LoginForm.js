@@ -72,10 +72,10 @@ function LoginForm({ login }) {
       <h3 className="my-5">Login Here!</h3>
       <form onSubmit={handleSubmit} className="m-4 text-left">
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="login-username">Username</label>
           <input
             type="text"
-            id="username"
+            id="login-username"
             value={formData.username}
             name="username"
             className="form-control"
@@ -83,10 +83,10 @@ function LoginForm({ login }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="login-password">Password</label>
           <input
             type="password"
-            id="password"
+            id="login-password"
             value={formData.password}
             name="password"
             className="form-control"

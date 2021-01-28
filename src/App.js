@@ -114,13 +114,13 @@ function App() {
   /** Function called by ProfileForm when submitted */
   function applyForJob(jobId) {
     async function applyForJobUsingApi() {
-      let res;
+      let applied;
       try {
-        res = await JoblyApi.applyForJob(currentUser.username, jobId);
+        applied = await JoblyApi.applyForJob(currentUser.username, jobId);
       } catch (err) {
         return { err };
       }
-      if (res.applied) {
+      if (applied) {
         setCurrentUser(currentUser =>
         ({
           ...currentUser,

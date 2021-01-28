@@ -67,10 +67,10 @@ function SignupForm({ signup }) {
       <h3 className="my-5">Signup Here!</h3>
       <form onSubmit={handleSubmit} className="m-4 text-left">
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="signup-username">Username</label>
           <input
             type="text"
-            id="username"
+            id="signup-username"
             value={formData.username}
             name="username"
             className="form-control"
@@ -78,10 +78,10 @@ function SignupForm({ signup }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="signup-password">Password</label>
           <input
             type="password"
-            id="password"
+            id="signup-password"
             value={formData.password}
             name="password"
             className="form-control"
@@ -89,10 +89,10 @@ function SignupForm({ signup }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="signup-firstName">First Name</label>
           <input
             type="text"
-            id="firstName"
+            id="signup-firstName"
             value={formData.firstName}
             name="firstName"
             className="form-control"
@@ -100,10 +100,10 @@ function SignupForm({ signup }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="signup-lastName">Last Name</label>
           <input
             type="text"
-            id="lastName"
+            id="signup-lastName"
             value={formData.lastName}
             name="lastName"
             className="form-control"
@@ -111,10 +111,10 @@ function SignupForm({ signup }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="signup-email">Email</label>
           <input
             type="email"
-            id="email"
+            id="signup-email"
             value={formData.email}
             name="email"
             className="form-control"

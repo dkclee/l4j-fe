@@ -22,7 +22,6 @@ import userContext from "./userContext";
  * 
  */
 function Routes({ login, signup, updateProfile, applyForJob }) {
-  console.log('Routes applyForJob', applyForJob);
 
   const currentUser = useContext(userContext);
   const loginLocation = {

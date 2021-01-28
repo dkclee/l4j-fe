@@ -63,7 +63,6 @@ class JoblyApi {
    */
   static async getUser(username) {
     let res = await this.request(`users/${username}`);
-    console.log("result of getUser method in API helper", res);
     return res.user;
   }
 
@@ -97,7 +96,7 @@ class JoblyApi {
       `users/${username}/jobs/${jobId}`,
       {}, 
       "post");
-    return res;
+    return res.applied;
   }
 
   /***************************************************** Company methods */

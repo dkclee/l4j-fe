@@ -46,13 +46,15 @@ function ProfileForm({ updateProfile }) {
   // Have we filled in every prompt?
   let notDone = (
     Object.values(formData)
-      .filter(v => v.trim() !== "").length < Object.keys(initialFormData).length
+      .filter(v => v.trim() !== "")
+        .length < Object.keys(initialFormData).length
   );
 
   let msgs = (msgInfo)
     ? <Alert msgs={msgInfo.msgs} type={msgInfo.type} />
     : null;
-
+    // Potential refacotr: loop through fields or add in a web
+    // framework 
   return (
     <div className="container col-md-6">
       <h3 className="my-5">Profile</h3>
@@ -62,10 +64,10 @@ function ProfileForm({ updateProfile }) {
           <p>{currentUser.username}</p>
         </div>
         <div className="form-group">
-          <label htmlFor="firstName">First Name</label>
+          <label htmlFor="profile-firstName">First Name</label>
           <input
             type="text"
-            id="firstName"
+            id="profile-firstName"
             value={formData.firstName}
             name="firstName"
             className="form-control"
@@ -73,10 +75,10 @@ function ProfileForm({ updateProfile }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Last Name</label>
+          <label htmlFor="profile-lastName">Last Name</label>
           <input
             type="text"
-            id="lastName"
+            id="profile-lastName"
             value={formData.lastName}
             name="lastName"
             className="form-control"
@@ -84,10 +86,10 @@ function ProfileForm({ updateProfile }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="profile-email">Email</label>
           <input
             type="email"
-            id="email"
+            id="profile-email"
             value={formData.email}
             name="email"
             className="form-control"
@@ -95,10 +97,10 @@ function ProfileForm({ updateProfile }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="profile-password">Password</label>
           <input
             type="password"
-            id="password"
+            id="profile-password"
             value={formData.password}
             name="password"
             className="form-control"
