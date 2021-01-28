@@ -8,9 +8,13 @@ import userContext from "../userContext";
  * Props:
  *  - signup - parent function called when user signs up
  * 
+ *  State:
+ *  - formData
+ *  - errors - array of error messages
+ * 
  * Context:
- *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
- *    where jobs is { id, title, companyHandle, companyName, state }
+ *  - currentUser - { username, firstName, lastName, isAdmin, applications }
+ *    where applications is [jobId, ...]
  */
 
 function SignupForm({ signup }) {

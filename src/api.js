@@ -96,7 +96,7 @@ class JoblyApi {
     let res = await this.request(
       `users/${username}/jobs/${jobId}`,
       {}, 
-      "patch");
+      "post");
     return res;
   }
 

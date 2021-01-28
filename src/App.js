@@ -20,9 +20,10 @@ import "bootstrap/dist/css/bootstrap.css";
  * - currentUser: 
  *    null  
  *      OR
- *    { username, firstName, lastName, isAdmin, jobs }
- *    where jobs is { id, title, companyHandle, companyName, state }
+ *    { username, firstName, lastName, isAdmin, applications }
+ *    where applications is [jobId, ...]
  * - token: Token to make AJAX requests
+ * - isLoggingIn: boolean if user is being logged in
  */
 
 function App() {
@@ -110,6 +111,26 @@ function App() {
     return updateProfileUsingApi();
   }
 
+  /** Function called by ProfileForm when submitted */
+  function applyForJob(jobId) {
+    async function applyForJobUsingApi() {
+      let res;
+      try {
+        res = await JoblyApi.applyForJob(currentUser.username, jobId);
+      } catch (err) {
+        return { err };
+      }
+      if (res.applied) {
+        setCurrentUser(currentUser =>
+        ({
+          ...currentUser,
+          applications: [...currentUser.applications, jobId]
+        }));
+      }
+    }
+    return applyForJobUsingApi();
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -122,6 +143,7 @@ function App() {
                 login={login}
                 signup={signup}
                 updateProfile={updateProfile}
+                applyForJob={applyForJob}
               />
           }
         </userContext.Provider>

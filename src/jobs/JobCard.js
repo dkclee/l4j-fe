@@ -3,12 +3,19 @@
  * Prop:
  * - id, title, salary, equity, companyHandle, companyName
  * - hasApplied: boolean 
+ *  - applyForJob - fn to call when applying for job
  */
 
-function JobCard({ id, title, salary, equity, companyHandle, companyName, hasApplied=false }) {
+function JobCard({ id, title, salary, equity, companyHandle, companyName, hasApplied=false, applyForJob }) {
+  
+  function onClick() {
+    console.log('apply for job', applyForJob);
+    applyForJob(id);
+  }
+
   let applicationBtn = (hasApplied) 
     ? <button className="btn disabled btn-danger">APPLIED</button>
-    : <button className="btn btn-danger">APPLY</button>;
+    : <button onClick={onClick} className="btn btn-danger">APPLY</button>;
 
   return (
     <div className="JobCard">

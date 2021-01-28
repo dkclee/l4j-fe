@@ -10,9 +10,13 @@ import Alert from "../shared/Alert";
  * Props:
  *  - login - parent function called when user logs in
  * 
+ *  State:
+ *  - formData
+ *  - errors - array of error messages
+ * 
  * Context:
- *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
- *    where jobs is { id, title, companyHandle, companyName, state }
+ *  - currentUser - { username, firstName, lastName, isAdmin, applications }
+ *    where applications is [jobId, ...]
  */
 
 function LoginForm({ login }) {

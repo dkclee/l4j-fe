@@ -9,7 +9,21 @@ import SignupForm from "./users/SignupForm";
 import ProfileForm from "./users/ProfileForm";
 import userContext from "./userContext";
 
-function Routes({ login, signup, updateProfile }) {
+
+/** Routes
+ * Props:
+ *  - login: fn from App that is called in LoginForm
+ *  - signup: fn from App that is called in SignupForm
+ *  - updateProfile: fn from App that is called in ProfileForm
+ *  - applyForJob: fn from App that is called in JobCard
+ * 
+ * Context:
+ *  - currentUser: user that is logged in
+ * 
+ */
+function Routes({ login, signup, updateProfile, applyForJob }) {
+  console.log('Routes applyForJob', applyForJob);
+
   const currentUser = useContext(userContext);
   const loginLocation = {
     pathname: "/login",
@@ -23,13 +37,19 @@ function Routes({ login, signup, updateProfile }) {
         <Homepage />
       </Route>
       <Route exact path="/companies">
-        {currentUser ? <Companies /> : <Redirect to={loginLocation} />}
+        {currentUser 
+          ? <Companies /> 
+          : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/companies/:handle">
-        {currentUser ? <CompanyDetail /> : <Redirect to={loginLocation} />}
+        {currentUser 
+          ? <CompanyDetail applyForJob={applyForJob}/> 
+          : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/jobs">
-        {currentUser ? <JobList /> : <Redirect to={loginLocation} />}
+        {currentUser 
+          ? <JobList applyForJob={applyForJob}/> 
+          : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/login">
         <LoginForm login={login} />

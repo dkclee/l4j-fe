@@ -6,6 +6,9 @@ import JobCardList from "../jobs/JobCardList";
 
 /** JobList
  * 
+ * Props:
+ *  - applyForJob - fn to call when applying for job called in JobCard
+ * 
  * State:
  * - jobs: Array of job objects
  *    [{ id, title, salary, equity }, ...]
@@ -15,7 +18,9 @@ import JobCardList from "../jobs/JobCardList";
  * 
  */
 
-function JobList() {
+function JobList({applyForJob}) {
+  console.log('JobList applyForJob', applyForJob);
+
   const [jobs, setJobs] = useState([]);
   const [title, setTitle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +63,7 @@ function JobList() {
   return (
     <div className="JobList m-5">
       <SearchForm onSearch={onSearch} />
-      <JobCardList jobs={jobs} />
+      <JobCardList jobs={jobs} applyForJob={applyForJob} />
     </div>
   );
 }

@@ -7,6 +7,9 @@ import JobCardList from "../jobs/JobCardList";
  * 
  * Show a company's details and jobs given url param
  * 
+ *  Props:
+ *  - applyForJob - fn to call when applying for job
+ * 
  * State:
  * - company: the object containing all the company information
  *  { handle, name, description, numEmployees, logoUrl, jobs }
@@ -18,7 +21,7 @@ import JobCardList from "../jobs/JobCardList";
  * 
  */
 
-function CompanyDetail() {
+function CompanyDetail({applyForJob}) {
   const [company, setCompany] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const {handle} = useParams();
@@ -47,7 +50,7 @@ function CompanyDetail() {
     <div className="CompanyDetail m-4">
       <h4>{company.name}</h4>
       <p>{company.description}</p>
-      <JobCardList jobs={company.jobs} />
+      <JobCardList jobs={company.jobs} applyForJob={applyForJob}/>
     </div>
   );
 }

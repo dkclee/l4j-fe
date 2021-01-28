@@ -9,9 +9,11 @@ import userContext from "../userContext";
  *    [{ id, title, salary, equity }, ...]
  *        OR
  *    [ { id, title, salary, equity, companyHandle, companyName }, ...]
+ *  - applyForJob - fn to call when applying for job called in JobCard
  */
 
-function JobCardList({ jobs }) {
+function JobCardList({ jobs, applyForJob }) {
+  console.log('JobCardList applyForJob', applyForJob);
   const currentUser = useContext(userContext);
   console.log(currentUser);
 
@@ -26,7 +28,8 @@ function JobCardList({ jobs }) {
       equity={j.equity}
       companyHandle={j.companyHandle}
       companyName={j.companyName}
-      hasApplied={appliedJobsId.has(j.id)} />
+      hasApplied={appliedJobsId.has(j.id)} 
+      applyForJob={applyForJob}/>
   ));
 
   return (

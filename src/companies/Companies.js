@@ -5,6 +5,7 @@ import JoblyApi from "../api";
 
 /** Show companies
  * 
+ * 
  * State:
  * - companies: Array of company objects
  *    [ { handle, name, description, numEmployees, logoUrl }, ...]

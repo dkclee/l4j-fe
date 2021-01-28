@@ -5,11 +5,15 @@ import userContext from "../userContext";
 /** ProfileForm
  * 
  * Props:
- *  - signup - parent function called when user signs up
+ *  - updateProfile - parent function called when user updates profile
+ * 
+ * State:
+ *  - formData
+ *  - msgInfo - object to display alert message
  * 
  * Context:
- *  - currentUser - { username, firstName, lastName, isAdmin, jobs }
- *    where jobs is { id, title, companyHandle, companyName, state }
+ *  - currentUser - { username, firstName, lastName, isAdmin, applications }
+ *    where applications is [jobId, ...]
  */
 
 function ProfileForm({ updateProfile }) {
@@ -25,8 +29,7 @@ function ProfileForm({ updateProfile }) {
   const [msgInfo, setMsgInfo] = useState(null);
 
 
-
-  /** handle form submission, call parent fn signup */
+  /** handle form submission, call parent fn updateProfile */
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await updateProfile(formData);
