@@ -13,7 +13,7 @@ function useLocalStorage(key, initialValue) {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
     } catch (err) {
-      console.log('err in getFromLocalStorage', err);
+      console.error('err in getFromLocalStorage', err);
       return initialValue;
     }
   }
@@ -29,14 +29,14 @@ function useLocalStorage(key, initialValue) {
       // if you pass to setValue a function, then set the value to be what is
       // currently stored passed into the function.
       const valueToStore = 
-      (value instanceof Function)
-      ? value(storedValue) 
-      : value;
+        (value instanceof Function)
+          ? value(storedValue) 
+          : value;
 
       setStoredValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (err) {
-      console.log('error in setValue', err);
+      console.error('error in setValue', err);
     }
   }
 

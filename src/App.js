@@ -28,6 +28,14 @@ import "bootstrap/dist/css/bootstrap.css";
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [token, setToken] = useLocalStorage('token', null);
+  // TODO: Have a piece of state that tells you that you are in the process
+  // of loggin in. "isLoading" of logging in and the routes can check this
+  // or maybe no route runs in the App. Show "checking credentials message"
+  // it can fail or succeed 
+
+  // Maybe pack into current user by having 3 different values: 
+
+  // Custom hooks: AJAX calls with loading/errors 
 
   /** Update the user state upon mount and when the token changes */
   useEffect(function updateUserOnChange() {

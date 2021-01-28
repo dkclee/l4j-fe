@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useLocation, useHistory } from "react-router-dom";
 
 import userContext from "../userContext";
 
@@ -22,7 +22,9 @@ function LoginForm({ login }) {
   const [errors, setErrors] = useState(null);
 
   const currentUser = useContext(userContext);
+  const location = useLocation();
   const history = useHistory();
+
 
   // don't let user login if already logged in
   if (currentUser) return <Redirect to="/" />;
@@ -52,12 +54,17 @@ function LoginForm({ login }) {
       .filter(v => v.trim() !== "").length < Object.keys(defaultFormData).length
   );
 
-  let alert = (errors)
+  let alertErrors = (errors)
     ? <Alert msgs={errors} />
+    : null;
+
+  let alertMsg = (location?.state?.msg)
+    ? <Alert msgs={[location.state.msg]} type="warning" />
     : null;
 
   return (
     <div className="container col-md-6">
+      {alertMsg}
       <h3 className="my-5">Login Here!</h3>
       <form onSubmit={handleSubmit} className="m-4 text-left">
         <div className="form-group">
@@ -82,7 +89,7 @@ function LoginForm({ login }) {
             onChange={handleChange}
           />
         </div>
-        {alert}
+        {alertErrors}
         <button disabled={notDone} className="btn btn-primary">Submit</button>
       </form>
     </div>

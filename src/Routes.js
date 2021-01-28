@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./Homepage";
 import Companies from "./companies/Companies";
@@ -7,14 +7,30 @@ import JobList from "./jobs/JobList";
 import LoginForm from "./users/LoginForm";
 import SignupForm from "./users/SignupForm";
 import ProfileForm from "./users/ProfileForm";
+import userContext from "./userContext";
 
 function Routes({ login, signup }) {
+  const currentUser = useContext(userContext);
+  const loginLocation = {
+    pathname: "/login",
+    state: {
+      msg: "You need to be logged in order to view this page"
+    }
+  }
   return (
     <Switch>
-      <Route exact path="/"><Homepage /></Route>
-      <Route exact path="/companies"><Companies /></Route>
-      <Route exact path="/companies/:handle"><CompanyDetail /></Route>
-      <Route exact path="/jobs"><JobList /></Route>
+      <Route exact path="/">
+        <Homepage />
+      </Route>
+      <Route exact path="/companies">
+        {currentUser ? <Companies /> : <Redirect to={loginLocation} /> }
+      </Route>
+      <Route exact path="/companies/:handle">
+        {currentUser ? <CompanyDetail /> : <Redirect to={loginLocation} /> }
+      </Route>
+      <Route exact path="/jobs">
+        {currentUser ? <JobList /> : <Redirect to={loginLocation} /> }
+      </Route>
       <Route exact path="/login">
         <LoginForm login={login} />
       </Route>
@@ -22,7 +38,7 @@ function Routes({ login, signup }) {
         <SignupForm signup={signup} />
       </Route>
       <Route exact path="/profile">
-        <ProfileForm />
+        {currentUser ? <ProfileForm /> : <Redirect to={loginLocation} /> }
       </Route>
       <Redirect to="/" />
     </Switch>
