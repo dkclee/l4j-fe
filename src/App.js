@@ -7,6 +7,7 @@ import Navigation from './Navigation';
 import userContext from "./userContext";
 
 import JoblyApi from "./api";
+import useLocalStorage from './useLocalStorage';
 
 import jwt from "jsonwebtoken";
 
@@ -26,7 +27,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useLocalStorage('token', null);
 
   /** Update the user state upon mount and when the token changes */
   useEffect(function updateUserOnChange() {
