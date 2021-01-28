@@ -33,7 +33,7 @@ function App() {
     async function updateUser() {
       try {
         JoblyApi.token = token;
-        let {username} = jwt.decode(token);
+        let { username } = jwt.decode(token);
         let user = await JoblyApi.getUser(username);
         setCurrentUser(user);
       } catch (err) {
@@ -51,7 +51,7 @@ function App() {
     // Want to clear the user so that there isn't a state where
     // token refers to one user and user is another user
     setCurrentUser(null);
-    if(token) updateUser();
+    if (token) updateUser();
   }, [token]);
 
   /** Function called by LoginForm when submitted */
@@ -60,11 +60,9 @@ function App() {
       try {
         let newToken = await JoblyApi.login(formData);
         setToken(newToken);
-        // Perhaps return a different message when you successfully login
-        // so that we can display as a separate message
-        return null;
+        return { success: true };
       } catch (err) {
-        return err;
+        return { success: false, err };
       }
     }
     return loginUsingApi();
@@ -76,15 +74,12 @@ function App() {
       try {
         let newToken = await JoblyApi.signup(formData);
         setToken(newToken);
-        // Perhaps return a different message when you successfully login
-        // so that we can display as a separate message
-        return null;
+        return { success: true };
       } catch (err) {
-        return err;
+        return { success: false, err };
       }
     }
     return signupUsingApi();
-
   }
 
   /** Function called by Navigation when logout btn is clicked */

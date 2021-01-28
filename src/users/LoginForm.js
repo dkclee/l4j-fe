@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import userContext from "../userContext";
 
@@ -17,9 +17,12 @@ import Alert from "../shared/Alert";
 
 function LoginForm({ login }) {
   const defaultFormData = { username: '', password: '' };
+
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(null);
+
   const currentUser = useContext(userContext);
+  const history = useHistory();
 
   // don't let user login if already logged in
   if (currentUser) return <Redirect to="/" />;
@@ -29,10 +32,12 @@ function LoginForm({ login }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await login(formData);
-    // maybe use the history object to push the user to homepage
-    // if the user login was successful
-    // TODO: we can use location object when we do history.push
-    setErrors(result);
+
+    if (result.success) {
+      history.push('/companies');
+    } else {
+      setErrors(result.err);
+    }
   }
 
   /** Update formData state with current state */

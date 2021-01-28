@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import Alert from "../shared/Alert";
 import userContext from "../userContext";
 
@@ -23,7 +23,9 @@ function SignupForm({ signup }) {
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(null);
+
   const currentUser = useContext(userContext);
+  const history = useHistory();
 
   // don't let user sign up if already logged in
   if (currentUser) return <Redirect to="/" />;
@@ -31,8 +33,13 @@ function SignupForm({ signup }) {
   /** handle form submission, call parent fn signup */
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // TODO: make similar changes like the LoginForm
-    setErrors(await signup(formData));
+    let result = await signup(formData);
+
+    if (result.success) {
+      history.push('/companies');
+    } else {
+      setErrors(result.err);
+    }
   }
 
   /** Update formData state with current state */
