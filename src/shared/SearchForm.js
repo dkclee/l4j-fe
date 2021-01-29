@@ -9,6 +9,8 @@ import {debounce} from "lodash";
  * 
  * State:
  *  - searchTerm
+ *  - isSearching - boolean describing whether we are currently 
+ *    in the process of searching (a new searchTerm was typed)
  */
 
 function SearchForm({ onSearch, term=""}) {
