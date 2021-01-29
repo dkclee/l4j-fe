@@ -41,7 +41,7 @@ function SearchForm({ onSearch, term=""}) {
     setIsSearching(true);
   }
 
-  useEffect(() => {
+  useEffect(function makeDelayedSearch() {
     delayedSearch();
  
     // Cancel the debounce on useEffect cleanup.
