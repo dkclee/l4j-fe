@@ -21,7 +21,7 @@ import JobCardList from "../jobs/JobCardList";
 function JobList({applyForJob}) {
 
   const [jobs, setJobs] = useState([]);
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
 
@@ -61,7 +61,7 @@ function JobList({applyForJob}) {
 
   return (
     <div className="JobList m-5">
-      <SearchForm onSearch={onSearch} />
+      <SearchForm onSearch={onSearch} term={title} />
       <JobCardList jobs={jobs} applyForJob={applyForJob} />
     </div>
   );

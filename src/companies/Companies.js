@@ -55,7 +55,7 @@ function Companies() {
 
   return (
     <div className="Companies m-5">
-      <SearchForm onSearch={onSearch} />
+      <SearchForm onSearch={onSearch} term={name} />
       <CompaniesList companies={companies} />
     </div>
   );
