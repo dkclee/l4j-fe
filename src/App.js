@@ -126,7 +126,7 @@ function App() {
         setCurrentUser(currentUser =>
         ({
           ...currentUser,
-          applications: [...currentUser.applications, jobId]
+          jobs: [...currentUser.jobs, jobId]
         }));
       }
     }

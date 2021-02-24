@@ -16,7 +16,7 @@ function JobCardList({ jobs, applyForJob }) {
   const currentUser = useContext(userContext);
   // Potential refactor to have applications as a set on currentUser rather
   // than creating a set each time
-  let appliedJobsId = new Set(currentUser.applications);
+  let appliedJobsId = new Set(currentUser.jobs);
 
   let jobCards = jobs.map(j => (
     <JobCard 
