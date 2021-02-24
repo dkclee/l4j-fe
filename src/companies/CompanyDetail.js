@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Redirect } from "react-router-dom";
 import JoblyApi from "../api";
+import LoadingSpinner from "../LoadingSpinner";
 import JobCardList from "../jobs/JobCardList";
 
 /** Show CompanyDetail
@@ -44,7 +45,7 @@ function CompanyDetail({applyForJob}) {
     return <Redirect to="/companies" />
   }
 
-  if(isLoading) return <div>Currently loading!</div>
+  if(isLoading) return <LoadingSpinner msg="Loading the detail" />
 
   return (
     <div className="CompanyDetail m-4">

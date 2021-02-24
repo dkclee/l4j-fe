@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import CompaniesList from "./CompaniesList";
 import SearchForm from "../shared/SearchForm";
+import LoadingSpinner from "../LoadingSpinner";
 import JoblyApi from "../api";
 
 /** Show companies
@@ -51,7 +52,7 @@ function Companies() {
     setIsLoading(true);
   }
 
-  if (isLoading) return <div>Currently Loading!</div>
+  if (isLoading) return <LoadingSpinner msg="Loading the companies!" />
 
   return (
     <div className="Companies m-5">

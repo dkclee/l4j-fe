@@ -11,6 +11,8 @@ import useLocalStorage from './useLocalStorage';
 
 import jwt from "jsonwebtoken";
 
+import LoadingSpinner from "./LoadingSpinner";
+
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -67,12 +69,12 @@ function App() {
       try {
         let newToken = await JoblyApi.login(formData);
         setToken(newToken);
+        setIsLoggingIn(true);
         return { success: true };
       } catch (err) {
         return { success: false, err };
       }
     }
-    setIsLoggingIn(true);
     return loginUsingApi();
   }
 
@@ -138,7 +140,7 @@ function App() {
           <Navigation logout={logout} />
           {
             (isLoggingIn)
-              ? <div>Logging in....</div>
+              ? <LoadingSpinner />
               : <Routes
                 login={login}
                 signup={signup}
