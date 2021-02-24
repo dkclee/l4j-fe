@@ -13,7 +13,7 @@ function Homepage() {
 
   if(!currentUser) return (
     <div className="Homepage m-5">
-      <h1>Jobly</h1>
+      <h1>L4J</h1>
       <p>Find all the jobs you want here!</p>
       <Link className="btn btn-primary m-3" to="/login">Log In</Link>
       <Link className="btn btn-primary m-3" to="/signup">Sign Up</Link>
@@ -22,7 +22,7 @@ function Homepage() {
 
   return (
     <div className="Homepage m-5">
-      <h1>Welcome to Jobly, {currentUser.firstName}!</h1>
+      <h1>Welcome to L4J, {currentUser.firstName}!</h1>
       <p>Find all the jobs you want here!</p>
     </div>
   );
