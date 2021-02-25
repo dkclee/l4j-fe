@@ -48,6 +48,7 @@ In order to host the project locally, follow these steps
     npm start
     
 In a new terminal tab (cmd + t) for the backend
+    
     cd ..
     git clone https://github.com/d-lee84/l4j-be.git
     cd l4j-be
