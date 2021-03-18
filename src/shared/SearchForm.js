@@ -51,7 +51,7 @@ function SearchForm({ onSearch, term=""}) {
   return (
     <form onSubmit={handleSubmit} className="m-4">
       <div className="form-group row">
-        <div className="col-11">
+        <div className="col">
           <input
             id="searchTerm"
             name="searchTerm"
@@ -60,9 +60,6 @@ function SearchForm({ onSearch, term=""}) {
             className="form-control form-control-lg"
             onChange={handleChange}
           />
-        </div>
-        <div className="col-1">
-          <button className="btn btn-primary btn-lg">Submit!</button>
         </div>
       </div>
     </form>
