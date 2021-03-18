@@ -57,7 +57,7 @@ function ProfileForm({ updateProfile }) {
     // framework 
   return (
     <div className="container col-md-6">
-      <h3 className="my-5">Profile</h3>
+      <h3 className="my-5">Update Your Profile</h3>
       <form onSubmit={handleSubmit} className="m-4 text-left">
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -97,7 +97,7 @@ function ProfileForm({ updateProfile }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="profile-password">Password</label>
+          <label htmlFor="profile-password">Password to confirm your change</label>
           <input
             type="password"
             id="profile-password"
