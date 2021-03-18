@@ -4,12 +4,14 @@ This is the React front-end for [L4J](http://l4j.demo.dkclee.com/).
 
 ## Motivation
 <!-- A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists. -->
-(Sarcasm) In the world where students are rushing to get jobs, there is a need for
+*(Sarcasm)* In the world where students are rushing to get jobs, there is a need for
 an easy site where applicants can view details regarding a company and 
 apply for jobs. This application seeks to replace LinkedIn, Glassdoor, AngelList
-all at once! (End of sarcasm). Wanting to learn more about React and to build a
-bigger application, I built a front end application for the back end application
-that I designed in Express [(Backend Application)](https://github.com/d-lee84/l4j-be).
+all at once! *(End of sarcasm)* 
+
+Wanting to learn more about React and to build a bigger application, I built 
+the front end portion for the back end application that I designed in Express 
+[(Backend Application)](https://github.com/d-lee84/l4j-be). 
 
 <!-- ## Build status
 Build status of continus integration i.e. travis, appveyor etc. Ex. - 
@@ -37,7 +39,12 @@ Include logo/demo screenshot etc. -->
 - [Axios](https://github.com/axios/axios)
 
 ## Features
-
+The application allows users to sign up and log into their accounts to 
+view the descriptions and jobs that are available for different companies. 
+The user can apply for various jobs which makes an AJAX request to our 
+API and makes the corresponding change in the front-end. Various routes 
+to the application are protected through a middleware ensuring that only 
+loged in user can view those pages. 
 
 ## How to use?
 In order to host the project locally, follow these steps
