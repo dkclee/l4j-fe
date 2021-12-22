@@ -49,7 +49,7 @@ loged in user can view those pages.
 ## How to use?
 In order to host the project locally, follow these steps
 
-    git clone https://github.com/d-lee84/l4j-fe.git
+    git clone https://github.com/dkclee/l4j-fe.git
     cd l4j-fe
     npm install
     npm start
@@ -57,7 +57,7 @@ In order to host the project locally, follow these steps
 In a new terminal tab (cmd + t) for the backend
     
     cd ..
-    git clone https://github.com/d-lee84/l4j-be.git
+    git clone https://github.com/dkclee/l4j-be.git
     cd l4j-be
     npm install
     psql < l4j.sql
