@@ -40,12 +40,7 @@
         "warn"
       ],
       "no-restricted-imports": [
-        "error",
-        {
-          "patterns": [
-            ".*"
-          ]
-        }
+        "error"
       ]
     }
   },
