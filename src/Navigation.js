@@ -38,6 +38,9 @@ function Navigation({ logout }) {
           <NavLink key="profile" exact to="/profile" className="nav-link">Profile</NavLink>
         </li>
         <li className="nav-item">
+          <NavLink key="userApplication" exact to="/applications" className="nav-link">My Applications</NavLink>
+        </li>
+        <li className="nav-item">
           <button onClick={handleClick} className="nav-link btn btn-link">Logout {currentUser.username}</button>
         </li>
       </>);

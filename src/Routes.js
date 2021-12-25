@@ -8,6 +8,7 @@ import LoginForm from "./users/LoginForm";
 import SignupForm from "./users/SignupForm";
 import ProfileForm from "./users/ProfileForm";
 import userContext from "./userContext";
+import JobListForUser from "./jobs/JobsForUser"
 
 
 /** Routes
@@ -48,6 +49,11 @@ function Routes({ login, signup, updateProfile, applyForJob }) {
       <Route exact path="/jobs">
         {currentUser 
           ? <JobList applyForJob={applyForJob}/> 
+          : <Redirect to={loginLocation} />}
+      </Route>
+      <Route exact path="/applications">
+        {currentUser 
+          ? <JobListForUser/> 
           : <Redirect to={loginLocation} />}
       </Route>
       <Route exact path="/login">

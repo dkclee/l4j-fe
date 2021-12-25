@@ -143,6 +143,15 @@ class JoblyApi {
     return res.jobs;
   }
 
+  /** Get details on all jobs given a title filter for user.
+  * Returns: 
+  * [ { id, title, salary, equity, companyHandle, companyName }, ...]
+  */
+
+ static async getAllJobsForUser(username) {
+  let res = await this.request("applications", {username});
+  return res.apps;
+}
 }
 
 // // for now, put token ("testuser" / "password" on class)
