@@ -6,21 +6,21 @@ import userContext from "../userContext";
 import Alert from "../shared/Alert";
 
 /** Show LoginForm
- * 
+ *
  * Props:
  *  - login - parent function called when user logs in
- * 
+ *
  *  State:
  *  - formData
  *  - errors - array of error messages
- * 
+ *
  * Context:
  *  - currentUser - { username, firstName, lastName, isAdmin, applications }
  *    where applications is [jobId, ...]
  */
 
 function LoginForm({ login }) {
-  const defaultFormData = { username: '', password: '' };
+  const defaultFormData = { username: "", password: "" };
 
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(null);
@@ -28,7 +28,6 @@ function LoginForm({ login }) {
   const currentUser = useContext(userContext);
   const location = useLocation();
   const history = useHistory();
-
 
   // don't let user login if already logged in
   if (currentUser) return <Redirect to="/" />;
@@ -38,10 +37,10 @@ function LoginForm({ login }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
     let result = await login(formData);
-    console.log('result :>> ', result);
+    console.log("result :>> ", result);
 
     if (result.success) {
-      history.push('/companies');
+      history.push("/companies");
     } else {
       setErrors(result.err);
     }
@@ -50,22 +49,19 @@ function LoginForm({ login }) {
   /** Update formData state with current state */
   function handleChange(evt) {
     let { name, value } = evt.target;
-    setFormData(formData => ({ ...formData, [name]: value }));
+    setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
   // Have we filled in every prompt?
-  let notDone = (
-    Object.values(formData)
-      .filter(v => v.trim() !== "").length < Object.keys(defaultFormData).length
-  );
+  let notDone =
+    Object.values(formData).filter((v) => v.trim() !== "").length <
+    Object.keys(defaultFormData).length;
 
-  let alertErrors = (errors)
-    ? <Alert msgs={errors} />
-    : null;
+  let alertErrors = errors ? <Alert msgs={errors} /> : null;
 
-  let alertMsg = (location?.state?.msg)
-    ? <Alert msgs={[location.state.msg]} type="warning" />
-    : null;
+  let alertMsg = location?.state?.msg ? (
+    <Alert msgs={[location.state.msg]} type="warning" />
+  ) : null;
 
   return (
     <div className="container col-md-6">
@@ -95,7 +91,9 @@ function LoginForm({ login }) {
           />
         </div>
         {alertErrors}
-        <button disabled={notDone} className="btn btn-primary">Submit</button>
+        <button disabled={notDone} className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );

@@ -1,9 +1,9 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import JobCard from "./JobCard";
 import userContext from "../userContext";
 
 /** Show JobCardList
- * 
+ *
  * Prop:
  * - jobs: jobs to display
  *    [{ id, title, salary, equity }, ...]
@@ -18,24 +18,21 @@ function JobCardList({ jobs, applyForJob }) {
   // than creating a set each time
   let appliedJobsId = new Set(currentUser.jobs);
 
-  let jobCards = jobs.map(j => (
-    <JobCard 
-      key={j.id} 
-      id={j.id} 
+  let jobCards = jobs.map((j) => (
+    <JobCard
+      key={j.id}
+      id={j.id}
       title={j.title}
       salary={j.salary}
       equity={j.equity}
       companyHandle={j.companyHandle}
       companyName={j.companyName}
-      hasApplied={appliedJobsId.has(j.id)} 
-      applyForJob={applyForJob}/>
+      hasApplied={appliedJobsId.has(j.id)}
+      applyForJob={applyForJob}
+    />
   ));
 
-  return (
-    <div className="JobCardList">
-      {jobCards}
-    </div>
-  );
+  return <div className="JobCardList">{jobCards}</div>;
 }
 
 export default JobCardList;

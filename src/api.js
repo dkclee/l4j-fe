@@ -19,9 +19,7 @@ class JoblyApi {
 
     const url = `${BASE_URL}/${endpoint}`;
     const headers = { Authorization: `Bearer ${JoblyApi.token}` };
-    const params = (method === "get")
-      ? data
-      : {};
+    const params = method === "get" ? data : {};
 
     try {
       return (await axios({ url, method, data, params, headers })).data;
@@ -47,7 +45,7 @@ class JoblyApi {
     let res = await this.request(
       "auth/register",
       { username, password, firstName, lastName, email },
-      "post",
+      "post"
     );
     return res.token;
   }
@@ -56,8 +54,8 @@ class JoblyApi {
 
   /** Get details on a user
    *  - Only returns details when the token is valid
-   * 
-   *  Returns 
+   *
+   *  Returns
    *  { username, firstName, lastName, isAdmin, applications }
    *    where applications is [jobId, ...]
    */
@@ -75,12 +73,14 @@ class JoblyApi {
    *
    * Authorization required: admin or same-user-as-:username
    **/
-  static async updateProfile(username,
-    { firstName, lastName, password, email }) {
+  static async updateProfile(
+    username,
+    { firstName, lastName, password, email }
+  ) {
     let res = await this.request(
       `users/${username}`,
       { firstName, lastName, password, email },
-      "patch",
+      "patch"
     );
     return res.user;
   }
@@ -91,58 +91,49 @@ class JoblyApi {
    *
    * Authorization required: admin or same-user-as-:username
    * */
-  static async applyForJob(username,jobId) {
-    let res = await this.request(
-      `users/${username}/jobs/${jobId}`,
-      {}, 
-      "post");
+  static async applyForJob(username, jobId) {
+    let res = await this.request(`users/${username}/jobs/${jobId}`, {}, "post");
     return res.applied;
   }
 
   /***************************************************** Company methods */
 
-  /** Get details on a company by handle. 
-   * Returns 
+  /** Get details on a company by handle.
+   * Returns
    *  { handle, name, description, numEmployees, logoUrl, jobs }
    *    where jobs is [{ id, title, salary, equity }, ...]
-  */
+   */
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get details on a company given a name filter. 
-   * Returns: 
+  /** Get details on a company given a name filter.
+   * Returns:
    * [{ handle, name, description, numEmployees, logoUrl }, ...]
-  */
+   */
 
   static async getAllCompanies(name = "") {
-    let data = (name)
-      ? { name }
-      : {};
+    let data = name ? { name } : {};
 
     let res = await this.request("companies", data);
     return res.companies;
   }
 
-
   /***************************************************** Job methods */
 
   /** Get details on all jobs given a title filter.
-  * Returns: 
-  * [ { id, title, salary, equity, companyHandle, companyName }, ...]
-  */
+   * Returns:
+   * [ { id, title, salary, equity, companyHandle, companyName }, ...]
+   */
 
   static async getAllJobs(title = "") {
-    let data = (title)
-      ? { title }
-      : {};
+    let data = title ? { title } : {};
 
     let res = await this.request("jobs", data);
     return res.jobs;
   }
-
 }
 
 // // for now, put token ("testuser" / "password" on class)

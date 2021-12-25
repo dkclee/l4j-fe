@@ -4,14 +4,14 @@ import Alert from "../shared/Alert";
 import userContext from "../userContext";
 
 /** SignupForm
- * 
+ *
  * Props:
  *  - signup - parent function called when user signs up
- * 
+ *
  *  State:
  *  - formData
  *  - errors - array of error messages
- * 
+ *
  * Context:
  *  - currentUser - { username, firstName, lastName, isAdmin, applications }
  *    where applications is [jobId, ...]
@@ -19,11 +19,11 @@ import userContext from "../userContext";
 
 function SignupForm({ signup }) {
   const defaultFormData = {
-    username: '',
-    password: '',
-    firstName: '',
-    lastName: '',
-    email: '',
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
   };
   const [formData, setFormData] = useState(defaultFormData);
   const [errors, setErrors] = useState(null);
@@ -40,7 +40,7 @@ function SignupForm({ signup }) {
     let result = await signup(formData);
 
     if (result.success) {
-      history.push('/companies');
+      history.push("/companies");
     } else {
       setErrors(result.err);
     }
@@ -49,18 +49,15 @@ function SignupForm({ signup }) {
   /** Update formData state with current state */
   function handleChange(evt) {
     let { name, value } = evt.target;
-    setFormData(formData => ({ ...formData, [name]: value }));
+    setFormData((formData) => ({ ...formData, [name]: value }));
   }
 
   // Have we filled in every prompt?
-  let notDone = (
-    Object.values(formData)
-      .filter(v => v.trim() !== "").length < Object.keys(defaultFormData).length
-  );
+  let notDone =
+    Object.values(formData).filter((v) => v.trim() !== "").length <
+    Object.keys(defaultFormData).length;
 
-  let alert = (errors)
-    ? <Alert msgs={errors} />
-    : null;
+  let alert = errors ? <Alert msgs={errors} /> : null;
 
   return (
     <div className="container col-md-6">
@@ -122,7 +119,9 @@ function SignupForm({ signup }) {
           />
         </div>
         {alert}
-        <button disabled={notDone} className="btn btn-primary">Submit</button>
+        <button disabled={notDone} className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
